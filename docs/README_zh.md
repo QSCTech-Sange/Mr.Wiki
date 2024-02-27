@@ -2,7 +2,12 @@
 
 [en](README.md) | [简体中文](docs/README_zh.md)
 
-Mr.Wiki 是一个使用 Python3 开发的基于本地LLM 的 RAG 检索聊天机器人，采用了如下组件：
+
+<div align="center">
+![Mr.Wiki](docs/sample.gif)
+</div>
+
+Mr.Wiki 是一个使用 Python3 开发的基于本地LLM 的使用向量数据库的 RAG 检索聊天机器人，采用了如下组件：
 - [streamlit](https://streamlit.io/) 用于前端界面构建
 - [llamaindex](https://www.llamaindex.ai/) LLM 数据框架
 - [chromadb](https://www.trychroma.com/) 用于向量数据库
@@ -14,13 +19,58 @@ Mr.Wiki 是一个使用 Python3 开发的基于本地LLM 的 RAG 检索聊天机
 - 向量数据库持久化在本地
 
 # 安装方法
-1. 创建 Python 虚拟环境
-
-2. 安装依赖
-
-3. 启动 LLM 后端（可选）
+使用下列指令，从 Github 上下载仓库，创建 Python 虚拟环境并安装依赖。
+```
+git clone git@github.com:QSCTech-Sange/Mr.Wiki.git
+cd Mr.Wiki && mkdir pyenv
+cd pyenv && python3 -m venv . 
+cd bin && source activate
+cd ../.. && pip3 install -r requirements.txt
+```
+如果你确定不需要虚拟环境，可以直接
+```
+git clone git@github.com:QSCTech-Sange/Mr.Wiki.git
+cd Mr.Wiki
+pip3 install -r requirements.txt
+```
 
 # 使用方法
+1. 修改代码中大语言模型为你所需要的
+```python
+llm = OpenAI(api_base="http://localhost:1234/v1", api_key="not-needed")
+```
+我这里的代码是使用了 [LM Studio](https://lmstudio.ai/) ，挂载了 
+qwen1_5-14b-chat-q3_k_m.gguf 并启动了一个 local server。
+
+假如你拥有 OpenAI 的 key，可以使用 OpenAI 的 GPT 模型。
+```
+from llama_index.llms.openai import OpenAI
+llm = OpenAI()
+```
+或者，你拥有其他可以被 [Ollama](https://ollama.com/) 启动的本地模型，你也可以
+```
+from llama_index.llms.ollama import Ollama
+llm = Ollama(model="mistral", request_timeout=30.0)
+```
+
+
+2. 修改代码中这一段 embedding 模型为你所需要的
+```python
+st.session_state.embed_model = resolve_embed_model("local:BAAI/bge-small-zh-v1.5")
+```
+例如，假如你拥有 OpenAI 的 key，你可以使用 OpenAI 的 embedding 模型。
+```
+from llama_index.embeddings.openai import OpenAIEmbedding
+st.session_state.embed_model = OpenAIEmbedding()
+```
+或者，你可以使用其他 huggingface 上的 embedding 模型
+```
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+st.session_state.embed_modelSettings.embed_model = HuggingFaceEmbedding(
+    model_name="BAAI/bge-small-en-v1.5"
+)
+```
+3. 接着运行
 ```
 streamlit run MrWiki.py
 ```
@@ -39,7 +89,3 @@ embedding 后的文件则保存在 chroma_db 下。
 
 # 常见问题
 1. 上传文件大小限制
-
-2. 自定义 LLM 
-
-3. 自定义 embedding
