@@ -89,3 +89,8 @@ embedding 后的文件则保存在 chroma_db 下。
 
 # 常见问题
 1. 上传文件大小限制
+在项目目录下
+```shell
+mkdir .streamlit && echo -e '[server]\nmaxUploadSize = 500' > .streamlit/config.toml
+```
+可以将限制放大到 500MB
