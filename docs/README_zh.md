@@ -3,9 +3,9 @@
 [en](README.md) | [简体中文](docs/README_zh.md)
 
 
-<div align="center">
-![Mr.Wiki](docs/sample.gif)
-</div>
+<p align="center">
+  <img src="https://github.com/QSCTech-Sange/Mr.Wiki/blob/main/docs/sample.gif">
+</p>
 
 Mr.Wiki 是一个使用 Python3 开发的基于本地LLM 的使用向量数据库的 RAG 检索聊天机器人，采用了如下组件：
 - [streamlit](https://streamlit.io/) 用于前端界面构建
@@ -20,7 +20,7 @@ Mr.Wiki 是一个使用 Python3 开发的基于本地LLM 的使用向量数据�
 
 # 安装方法
 使用下列指令，从 Github 上下载仓库，创建 Python 虚拟环境并安装依赖。
-```
+```shell
 git clone git@github.com:QSCTech-Sange/Mr.Wiki.git
 cd Mr.Wiki && mkdir pyenv
 cd pyenv && python3 -m venv . 
@@ -28,7 +28,7 @@ cd bin && source activate
 cd ../.. && pip3 install -r requirements.txt
 ```
 如果你确定不需要虚拟环境，可以直接
-```
+```shell
 git clone git@github.com:QSCTech-Sange/Mr.Wiki.git
 cd Mr.Wiki
 pip3 install -r requirements.txt
@@ -43,12 +43,12 @@ llm = OpenAI(api_base="http://localhost:1234/v1", api_key="not-needed")
 qwen1_5-14b-chat-q3_k_m.gguf 并启动了一个 local server。
 
 假如你拥有 OpenAI 的 key，可以使用 OpenAI 的 GPT 模型。
-```
+```python
 from llama_index.llms.openai import OpenAI
 llm = OpenAI()
 ```
 或者，你拥有其他可以被 [Ollama](https://ollama.com/) 启动的本地模型，你也可以
-```
+```python
 from llama_index.llms.ollama import Ollama
 llm = Ollama(model="mistral", request_timeout=30.0)
 ```
@@ -59,12 +59,12 @@ llm = Ollama(model="mistral", request_timeout=30.0)
 st.session_state.embed_model = resolve_embed_model("local:BAAI/bge-small-zh-v1.5")
 ```
 例如，假如你拥有 OpenAI 的 key，你可以使用 OpenAI 的 embedding 模型。
-```
+```python
 from llama_index.embeddings.openai import OpenAIEmbedding
 st.session_state.embed_model = OpenAIEmbedding()
 ```
 或者，你可以使用其他 huggingface 上的 embedding 模型
-```
+```python
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 st.session_state.embed_modelSettings.embed_model = HuggingFaceEmbedding(
     model_name="BAAI/bge-small-en-v1.5"
