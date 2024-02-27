@@ -1,5 +1,5 @@
 # Mr.Wiki
-[en](README.md) | [简体中文](docs/README_zh.md)en | 简体中文
+[en](README.md) | [简体中文](docs/README_zh.md)
 
 <p align="center">
   <img src="https://github.com/QSCTech-Sange/Mr.Wiki/blob/main/docs/sample.gif">
@@ -34,7 +34,7 @@ cd Mr.Wiki
 pip3 install -r requirements.txt
 ```
 # Usage
-Modify the code to use the desired large language model:
+1. Modify the code to use the desired large language model:
 ```python
 llm = OpenAI(api_base="http://localhost:1234/v1", api_key="not-needed")
 ```
@@ -50,7 +50,7 @@ Alternatively, if you have another local model that can be started by Ollama, yo
 from llama_index.llms.ollama import Ollama
 llm = Ollama(model="mistral", request_timeout=30.0)
 ```
-Modify the code to use the desired embedding model:
+2. Modify the code to use the desired embedding model:
 
 ```python
 st.session_state.embed_model = resolve_embed_model("local:BAAI/bge-small-zh-v1.5")
@@ -68,7 +68,7 @@ st.session_state.embed_modelSettings.embed_model = HuggingFaceEmbedding(
     model_name="BAAI/bge-small-en-v1.5"
 )
 ```
-Run the following command:
+3. Run the following command:
 ```shell
 streamlit run MrWiki.py
 ```
