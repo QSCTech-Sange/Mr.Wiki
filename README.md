@@ -38,13 +38,13 @@ pip3 install -r requirements.txt
 ```python
 llm = OpenAI(api_base="http://localhost:1234/v1", api_key="not-needed")
 ```
-In this example, the code uses LM Studio with the model qwen1_5-14b-chat-q3_k_m.gguf mounted and a local server started. If you have an OpenAI key, you can use the OpenAI GPT model as follows:
+In this example, the code uses [LM Studio](https://lmstudio.ai/) with the model qwen1_5-14b-chat-q3_k_m.gguf mounted and a local server started. If you have an OpenAI key, you can use the OpenAI GPT model as follows:
 
 ```python
 from llama_index.llms.openai import OpenAI
 llm = OpenAI()
 ```
-Alternatively, if you have another local model that can be started by Ollama, you can use:
+Alternatively, if you have another local model that can be started by [Ollama](https://ollama.com/), you can use:
 
 ```python
 from llama_index.llms.ollama import Ollama
